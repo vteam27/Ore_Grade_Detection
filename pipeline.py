@@ -9,10 +9,8 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from torchvision.datasets import ImageFolder
 
-image_url = "https://upload.wikimedia.org/wikipedia/commons/5/5d/Mother_Lode_Gold_OreHarvard_mine_quartz-gold_vein.jpg"
 
-
-loaded_model = joblib.load('LR_final.joblib')
+loaded_model = joblib.load('Weights/LR_model.joblib')
 
 FeedData=[53.17, 10.35, 1108.170000, 441.197000, 396.862000, 9.286860, 1.5600]
 feature_names = ["% Iron Feed", "% Silica Feed", "Starch Flow", "Amina Flow", "Ore Pulp Flow", "Ore Pulp pH", "Ore Pulp Density"]
@@ -47,10 +45,10 @@ class  ImageCNN(nn.Module):
 image_cnn = ImageCNN()
 
 # Load the pretrained weights from the .pth file
-model_path = 'Final_model.pth'
+model_path = 'Weights/CNN_Weights.pth'
 image_cnn.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
 image_cnn.eval()  # Set the model to evaluation mode
-img_path = "GRADE_A_5.jpg"
+img_path = "ore_images/GRADE_A/GRADE_A_5.jpg"
 image = Image.open(img_path)
 transform = transforms.Compose([
     transforms.Resize((256, 256)),
